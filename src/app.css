@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+/* HEADER CSS STARTS */
+.header{
+    height: 6rem;
+    width: 100%;
+    padding: 2rem 1rem;
+    background-color: rgb(31 41 55);
+    color: #fff;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #808080;
+}
+
+.header .navbar{
+    height: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .navbar ul{
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+}
+
+.header .navbar ul li .cart_link{
+    position: relative;
+}
+
+.header .navbar ul li .cart_cnt{
+    position: absolute;
+    top: -21px;
+    right: 0;
+}
+
+
+.header .navbar .logo img{
+    height: 3rem;
+    width: 8rem;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.ham-burger{
+    height: 2rem;
+    width: 3rem;
+    display: none;
+}
+
+@media (max-width: 692px){
+    .header .navbar ul{
+        display: none;
+    }
+
+    .header .navbar ul li{
+        margin: .5rem 0;
+    }
+
+    .ham-burger{
+        display: block;
+    }
+}
+
+/* HEADER CSS ENDS */
+
+/* Sign IN AND Sign Up CSS STARTS */
+
+#signInCss, #signUpCss{
+    box-shadow: 0px 0px 15px 4px rgb(153 153 235 / 20%);
+    position: relative;
+}
+
+#not_acc{
+    position: absolute;
+    bottom: -1.8rem;
+    left: 0;
+}
+
+/* Sign IN AND Sign Up CSS STARTS */
+
+/* FOOTER SECTION STARTS */
+
+.footer_section{
+    height: 4.6rem;
+    background-color: rgb(33, 40, 48); 
+}
+    
+/* FOOTER SECTION ENDS */   
