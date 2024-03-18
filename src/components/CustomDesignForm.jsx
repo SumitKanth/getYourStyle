@@ -36,7 +36,7 @@ const CustomDesignForm = () => {
       formData.append("dressImage", file);
       formData.append("details", details);
       console.log(formData);
-      const userDress = await axios.post("/users/user-dress", formData);
+      const userDress = await axios.post("/v1/users/user-dress", formData);
 
       if(!userDress){
         toast("Dress name should be unique")

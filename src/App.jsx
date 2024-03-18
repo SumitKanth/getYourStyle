@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom'
+import "./app.css";
 import Home from './components/Home';
 import Dress from './components/Dress';
 import CustomerDress from './components/CustomerDress';
@@ -9,8 +10,8 @@ import Cart from './components/Cart';
 import PrevOrders from './components/PrevOrders';
 import CustomDesignForm from './components/CustomDesignForm';
 import PageNotFound from './components/PageNotFound';
-import "./app.css";
 import axios from 'axios';
+import AdminValidate from './components/AdminValidate';
 
 const App = () => {
 
@@ -50,6 +51,8 @@ useEffect(() => {
           : <Route path="*" element={<PageNotFound />} />
           }
           <Route path="/custom-design-form" element={<CustomDesignForm />} />
+          <Route path="/admin-validate" element={<AdminValidate />} />
+
           <Route path="*" element={<PageNotFound />} />
 
         </Routes>

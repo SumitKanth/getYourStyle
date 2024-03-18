@@ -46,7 +46,7 @@ const Header = () => {
         (
             async() => {
                 try {
-                    const isUserAuth = await axios.get(`/users/user-auth`);
+                    const isUserAuth = await axios.get(`/v1/users/user-auth`);
                     if(isUserAuth.data.success){
                         setUserAuth(true)
                     }

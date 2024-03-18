@@ -39,7 +39,7 @@ const SignUp = () => {
     }
 
     try {
-      const user = await axios.post(`/users/register`, {name,phoneNumber: number, email, password})
+      const user = await axios.post(`/v1/users/register`, {name,phoneNumber: number, email, password})
       console.log(user)
       toast(`Welcome ${user.data.data.name} plz Sign In`)
       navigate('/signin')

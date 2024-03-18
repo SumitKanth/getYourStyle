@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Button, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Toaster, toast } from "react-hot-toast";
 import axios from "axios";
 
 const signIn = () => {
@@ -15,7 +15,7 @@ const signIn = () => {
   const signUpPage = () => {
     navigate("/signup");
   };
-
+  axios.defaults.withCredentials = true;
   const signInHandler = async(e) => {
     e.preventDefault();
     if(number.length < 9 || number.length > 11){
@@ -28,13 +28,13 @@ const signIn = () => {
     }
 
     try {
-        const user = await axios.post(`/users/login`, {phoneNumber: number, password});
+        const user = await axios.post(`/v1/users/login`, {phoneNumber: number, password});
         console.log(user)
         toast(`Welcome ${user.data.data.createdUser.name}`);
         navigate('/dress');
 
     } catch (error) {
-        toast('Invalid Details SignIn Again')
+        toast.error('Invalid Details SignIn Again')
         navigate('/signin')
     }
 
@@ -43,6 +43,7 @@ const signIn = () => {
   return (
     <>
       <Header />
+      <Toaster />
       <div className="bg-slate-800 h-[81vh] flex justify-center items-center flex-col">
         <Typography margin={"2rem 0"} fontSize={"1.2rem"} color={"#808080"}>
           Sign In for get your favourite dress
