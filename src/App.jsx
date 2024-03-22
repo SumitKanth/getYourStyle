@@ -12,16 +12,19 @@ import CustomDesignForm from './components/CustomDesignForm';
 import PageNotFound from './components/PageNotFound';
 import axios from 'axios';
 import AdminValidate from './components/AdminValidate';
+import AdminCart from './components/AdminCart';
+import AddDesign from './components/AddDesign';
 
 const App = () => {
 
   const [isAuth, setIsAuth] = useState(false);
 
+  const adminAuth = localStorage.getItem(import.meta.env.VITE_ADMIN_LOC_NAME);
 useEffect(() => {
   (
     async () => {
       try {
-        const isUserAuth = await axios.get('/users/user-auth');
+        const isUserAuth = await axios.get('/v1/users/user-auth');
 
         if(isUserAuth.data.success){
           setIsAuth(true)
@@ -49,6 +52,13 @@ useEffect(() => {
           {
           (isAuth) ? <Route path='/prev-order' element={<PrevOrders />} />
           : <Route path="*" element={<PageNotFound />} />
+          }
+          {
+            (adminAuth === import.meta.env.VITE_ADMIN_LOC_VAL) ? <>
+             <Route path='/add-design' element={<AddDesign />}/>
+             <Route path="/admin-cart" element={<AdminCart />} />
+            </> 
+            : <Route path="*" element={<PageNotFound />} />
           }
           <Route path="/custom-design-form" element={<CustomDesignForm />} />
           <Route path="/admin-validate" element={<AdminValidate />} />

@@ -9,9 +9,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
     const [userAuth, setUserAuth] = useState(false);
+    const [cartCount, setCartCount] = useState(0);
 
     const [hamNav, setHamNav] = useState(true);
     const navigate = useNavigate()
+    const adminAuth = localStorage.getItem(import.meta.env.VITE_ADMIN_LOC_NAME);
 
     const hamburgerNav = () => {
         
@@ -20,7 +22,7 @@ const Header = () => {
         const header = document.getElementsByClassName("header")[0];
         const ul = document.getElementById("ul");
         if(hamNav){
-            header.style.height = "20rem";  
+            header.style.height = "22rem";  
             header.style.position = "relative"
              
             ul.style.display = "flex";
@@ -47,9 +49,13 @@ const Header = () => {
             async() => {
                 try {
                     const isUserAuth = await axios.get(`/v1/users/user-auth`);
+                    console.log(isUserAuth)
                     if(isUserAuth.data.success){
                         setUserAuth(true)
                     }
+                    const userDress = await axios.get("/v1/users//user-dress-for-cart");
+                    
+                    setCartCount(userDress.data.data.length);
                 } catch (error) {
                     console.log(error?.message || "USER NOT AUTH")
                 }
@@ -71,10 +77,19 @@ const Header = () => {
                         <ul id="ul">
                         <li className="pr-3 pl-3"><Link to="/">Home</Link></li>
                         <li className="pr-3 pl-3"><Link to="/dress">Design</Link></li>
-                        <li className="pr-3 pl-3" ><Link to="/customer-dress">CustomerDesign</Link></li>
+                        <li className="pr-3 pl-3" ><Link to="/custom-design-form">CustomerDesignForm</Link></li>
+
+                       {adminAuth === import.meta.env.VITE_ADMIN_LOC_VAL ? 
+                       <li className="pr-3 pl-3" ><Link to="/admin-cart">Admin Cart</Link></li>
+                   
+                    :
+                   <></>
+                }
+
+
                         <li className="pr-3 pl-3"><Link to="/prev-order">PrevOrder</Link></li>
                         <li className="pr-3 pl-3"><Link to="/cart" className="cart_link">
-                            <span className="cart_cnt">0</span>
+                            <span className="cart_cnt">{cartCount}</span>
                             <ShoppingCartOutlinedIcon fontSize="large" className="h-28" />
                             </Link></li>
                     </ul>
@@ -82,10 +97,22 @@ const Header = () => {
                         <ul id="ul">
                         <li className="pr-3 pl-3"><Link to="/">Home</Link></li>
                         <li className="pr-3 pl-3"><Link to="/dress">Design</Link></li>
-                        <li className="pr-3 pl-3" >CustomerDesign</li>
+                        {/* <li className="pr-3 pl-3" >CustomerDesign</li> */}
+
+                        {adminAuth === import.meta.env.VITE_ADMIN_LOC_VAL ? 
+                        <>
+                        <li className="pr-3 pl-3" ><Link to="/admin-cart">Admin Cart</Link></li>
+                        <li className="pr-3 pl-3" ><Link to="/add-design">Add Design</Link></li>
+                        </>
+                   
+                    :
+                   <></>
+                }
+
+
                         <li className="pr-3 pl-3"><Link to="/signin">SignIn</Link></li>
                         <li className="pr-3 pl-3"><Link to="/cart" className="cart_link">
-                            <span className="cart_cnt">0</span>
+                            <span className="cart_cnt">{cartCount}</span>
                             <ShoppingCartOutlinedIcon fontSize="large" className="h-28" />
                             </Link></li>
                     </ul>

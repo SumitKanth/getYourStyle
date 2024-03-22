@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Typography } from "@mui/material";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import  toast, {Toaster} from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const CustomDesignForm = () => {
@@ -11,7 +11,7 @@ const CustomDesignForm = () => {
 
   const navigate = useNavigate();
 
-  const [dressName, setDressName] = useState("");
+  let [dressName, setDressName] = useState("");
   const [number, setNumber] = useState("");
   const [details, setDetails] = useState("");
   const [file, setFile] = useState(null);
@@ -21,16 +21,18 @@ const CustomDesignForm = () => {
 
     e.preventDefault();
 
-    if(number > 11 || number < 9){
-      toast('Number should be of length 10')
+    if(number.length > 11 || number.length <= 9){
+      toast.error('Number should be of length 10')
       return ;
     }
     if (!file) {
-      toast("Plz Upload file");
+       toast.error("Plz Upload file");
+       return
     }
     try {
       console.log(file);
       const formData = new FormData();
+      dressName = dressName.toLowerCase()
       formData.append("dressName", dressName);
       formData.append("phoneNumber", number);
       formData.append("dressImage", file);
@@ -39,18 +41,15 @@ const CustomDesignForm = () => {
       const userDress = await axios.post("/v1/users/user-dress", formData);
 
       if(!userDress){
-        toast("Dress name should be unique")
+        toast.error("Dress name should be unique")
       }
       
       console.log("This done bro");
-      navigate("/");
-      toast("Dress Uploaded Successfully you have made it");
-      
-      
+      navigate("/");      
       
     } catch (error) {
       console.log("HELLO");
-      toast("Dress name should not be same");
+      toast.error("Dress name should not be same");
       console.log(error?.message || "User Dress Not Uploaded");
     }
   };
@@ -58,7 +57,7 @@ const CustomDesignForm = () => {
   return (
     <>
       <Header />
-
+      <Toaster />
       <div className="bg-slate-800 h-[81vh] xl:h-[78vh] flex justify-center items-center flex-col">
         <Typography margin={"2rem 0"} fontSize={"1.2rem"} color={"#808080"}>
           Get Your Own Design
@@ -118,18 +117,6 @@ const CustomDesignForm = () => {
             >
               Click
             </button>
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
           </form>
         </div>
       </div>

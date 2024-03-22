@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Button, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Toaster, toast } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
 const signIn = () => {
@@ -18,19 +18,19 @@ const signIn = () => {
   axios.defaults.withCredentials = true;
   const signInHandler = async(e) => {
     e.preventDefault();
-    if(number.length < 9 || number.length > 11){
-        toast('Number Should Be of length 10')
+    if(number.length <= 9 || number.length > 11){
+        toast.error('Number Should Be of length 10')
         return 
     }
     if(!(number && password)){
-        toast('All fields required')
+        toast.error('All fields required')
         return 
     }
 
     try {
-        const user = await axios.post(`/v1/users/login`, {phoneNumber: number, password});
+        const user = await axios.post("/v1/users/login", {phoneNumber: number, password});
         console.log(user)
-        toast(`Welcome ${user.data.data.createdUser.name}`);
+        toast.success(`Welcome ${user.data.data.createdUser.name}`);
         navigate('/dress');
 
     } catch (error) {

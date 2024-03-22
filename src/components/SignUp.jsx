@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import { Button, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-toastify";
+import toast, {Toaster} from "react-hot-toast";
 
 
 const SignUp = () => {
@@ -24,28 +24,28 @@ const SignUp = () => {
     e.preventDefault();
 
     if(!(name && email && number && password)){
-      toast('Plz fill all details properly');
-      return 
+      toast.error('Plz fill all details properly');
+      return ;
     }
 
-    if(number.length < 9 || number.length > 10){
-      toast('Number length Should be 10');
-      return 
+    if(number.length <= 9 || number.length > 10){
+      toast.error('Number length Should be 10');
+      return ;
     }
     email = email.toLowerCase();
     if(!email.endsWith("@gmail.com")){
-      toast('Email should be valid');
-      return 
+      toast.error('Email should be valid');
+      return ;
     }
 
     try {
       const user = await axios.post(`/v1/users/register`, {name,phoneNumber: number, email, password})
       console.log(user)
-      toast(`Welcome ${user.data.data.name} plz Sign In`)
       navigate('/signin')
+      toast.success(`Welcome ${user.data.data.name} plz Login`)
 
     } catch (error) {
-      toast(`Plz Sign In`)
+      toast.error(`Plz Sign In`)
       navigate('/signin');
     }
     
@@ -54,6 +54,7 @@ const SignUp = () => {
   return (
     <>
       <Header />
+      <Toaster />
       <div className="bg-slate-800 h-[81vh] xl:h-[78vh] flex justify-center items-center flex-col">
         <Typography margin={"2rem 0"} fontSize={"1.2rem"} color={"#808080"}>
           Sign Up for get your favourite dress
