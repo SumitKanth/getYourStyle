@@ -56,7 +56,7 @@ const Dress = () => {
     (
       async () => {
         try {
-          const allDresss = await axios.get("/api/v1/admin/all-dress"); 
+          const allDresss = await axios.get(`/admin/all-dress`); 
           setDresses(allDresss.data.data)
           console.log("All Dress: ", allDresss.data.data)
           console.log("Dresses: ", dresses)
