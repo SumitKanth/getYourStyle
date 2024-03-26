@@ -23,7 +23,7 @@ const Cart = () => {
     console.log(dress._id)
     try {
         console.log("Order Before Deleted");
-        const deleted_order = await axios.post("/v1/users/order-delete", {dress_id: dress._id})
+        const deleted_order = await axios.post("/api/v1/users/order-delete", {dress_id: dress._id})
         console.log("Order After Deleted");
         console.log(deleted_order);
         toast.success("Order Canceled Successfully")
@@ -35,7 +35,7 @@ const Cart = () => {
 useEffect(() => {
   (async () => {
     try {
-      const userDress = await axios.get("/v1/users/user-dress-for-cart");
+      const userDress = await axios.get("/api/v1/users/user-dress-for-cart");
       console.log(dress)
       setDress(userDress.data.data);
       console.log(dress)

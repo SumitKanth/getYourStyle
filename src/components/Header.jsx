@@ -48,12 +48,12 @@ const Header = () => {
         (
             async() => {
                 try {
-                    const isUserAuth = await axios.get(`/v1/users/user-auth`);
+                    const isUserAuth = await axios.get(`/api/v1/users/user-auth`);
                     console.log(isUserAuth)
                     if(isUserAuth.data.success){
                         setUserAuth(true)
                     }
-                    const userDress = await axios.get("/v1/users//user-dress-for-cart");
+                    const userDress = await axios.get("/api/v1/users//user-dress-for-cart");
                     
                     setCartCount(userDress.data.data.length);
                 } catch (error) {

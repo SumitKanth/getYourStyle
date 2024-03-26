@@ -28,7 +28,7 @@ const AdminCart = () => {
     e.preventDefault();
         console.log(price, orderInfo, dress)
         try {
-            const updatedUser = await axios.post("/v1/admin/updating-price-stage", {
+            const updatedUser = await axios.post("/api/v1/admin/updating-price-stage", {
                 dress_id: dress._id,
                 price: price,
                 phoneNumber: dress.phoneNumber,
@@ -45,7 +45,7 @@ const AdminCart = () => {
 
   const orderCompleted = async(dress) => {
     try {
-        const order = await axios.post("/v1/admin/order-completed", {phoneNumber: dress.phoneNumber, dress_id: dress._id})
+        const order = await axios.post("/api/v1/admin/order-completed", {phoneNumber: dress.phoneNumber, dress_id: dress._id})
     } catch (error) {
         console.log(error)
         toast.error("Plz Click Again")
@@ -54,7 +54,7 @@ const AdminCart = () => {
 
   useEffect(() => {
     (async () => {
-      const dress = await axios.get("/v1/admin/user-order");
+      const dress = await axios.get("/api/v1/admin/user-order");
       setDress(dress.data.data);
     })();
   }, []);

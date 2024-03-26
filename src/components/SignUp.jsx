@@ -21,6 +21,7 @@ const SignUp = () => {
 
   axios.defaults.withCredentials = true
   const signUpHandler = async(e) => {
+    console.log("IN MAIL")
     e.preventDefault();
 
     if(!(name && email && number && password)){
@@ -39,7 +40,14 @@ const SignUp = () => {
     }
 
     try {
-      const user = await axios.post(`/v1/users/register`, {name,phoneNumber: number, email, password})
+        console.log(name, number, email, password);
+        const fd = new FormData();
+        fd.append("name", name)
+        fd.append("phoneNumber", number);
+        fd.append("email", email);
+        fd.append("password", password);
+    //   const user = await axios.post(`/api/v1/users/register`, fd)
+      const user = await axios.post(`/api/v1/users/register`, {name,phoneNumber: number, email, password})
       console.log(user)
       navigate('/signin')
       toast.success(`Welcome ${user.data.data.name} plz Login`)

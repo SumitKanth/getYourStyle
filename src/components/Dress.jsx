@@ -24,12 +24,12 @@ const Dress = () => {
 
   const addToCart = async(dress) => {
     try {
-      const user = await axios.get("/v1/users/user-auth");
+      const user = await axios.get("/api/v1/users/user-auth");
       if(!user || !user.data.success){
         return toast.error('Plz SignIn Or SignUp first')
       }
 
-      const userDressFromDressSection = await axios.post("/v1/users/user-dress-from-dress-section", {
+      const userDressFromDressSection = await axios.post("/api/v1/users/user-dress-from-dress-section", {
         dressName: dress.name,
         phoneNumber: user.data.data.user.phoneNumber,
         dressImage: dress.image,
@@ -56,7 +56,7 @@ const Dress = () => {
     (
       async () => {
         try {
-          const allDresss = await axios.get(`/v1/admin/all-dress`); 
+          const allDresss = await axios.get(`/api/v1/admin/all-dress`); 
           setDresses(allDresss.data.data)
           console.log("All Dress: ", allDresss.data.data)
           console.log("Dresses: ", dresses)

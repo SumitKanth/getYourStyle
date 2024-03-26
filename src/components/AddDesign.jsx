@@ -31,7 +31,7 @@ const AddDesign = () => {
       formData.append("image", file);
       formData.append("price", price);
       formData.append("details", details)
-      const dress = await axios.post(`/v1/admin/dress-upload`,formData)
+      const dress = await axios.post(`/api/v1/admin/dress-upload`,formData)
       console.log(dress)
       toast.success(`Dress Uploaded SuccessFully`)
       navigate('/dress')

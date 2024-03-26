@@ -28,7 +28,7 @@ const PrevOrders = () => {
     (
       async() => {
         try {
-          const userDress = await axios.post("/v1/users/particular-custom-dresses");
+          const userDress = await axios.post("/api/v1/users/particular-custom-dresses");
           console.log(userDress)
           setDress(userDress.data.data.userCustomDress);
         } catch (error) {
