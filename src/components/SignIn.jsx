@@ -28,7 +28,7 @@ const signIn = () => {
     }
 
     try {
-        const user = await axios.post("/api/v1/users/login", {phoneNumber: number, password});
+        const user = await axios.post("https://getyourstyle-backend.onrender.com/api/v1/users/login", {phoneNumber: number, password});
         console.log(user)
         toast.success(`Welcome ${user.data.data.createdUser.name}`);
         navigate('/dress');
@@ -36,6 +36,7 @@ const signIn = () => {
     } catch (error) {
         toast.error('Invalid Details SignIn Again')
         navigate('/signin')
+        console.log(error)
     }
 
   }

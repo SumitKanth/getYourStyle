@@ -47,7 +47,7 @@ const SignUp = () => {
         fd.append("email", email);
         fd.append("password", password);
     //   const user = await axios.post(`/api/v1/users/register`, fd)
-      const user = await axios.post(`/api/v1/users/register`, {name,phoneNumber: number, email, password})
+      const user = await axios.post(`https://getyourstyle-backend.onrender.com/api/v1/users/register`, {name,phoneNumber: number, email, password})
       console.log(user)
       console.log("IN COMPLETED SECTION")
       navigate('/signin')
@@ -55,8 +55,10 @@ const SignUp = () => {
 
     } catch (error) {
         console.log("IN ERROR SECTION")
+        console.log(error)
       toast.error(`Plz Sign In`)
       navigate('/signup');
+      
     }
     
   }
