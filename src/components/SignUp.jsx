@@ -49,12 +49,14 @@ const SignUp = () => {
     //   const user = await axios.post(`/api/v1/users/register`, fd)
       const user = await axios.post(`/api/v1/users/register`, {name,phoneNumber: number, email, password})
       console.log(user)
+      console.log("IN COMPLETED SECTION")
       navigate('/signin')
       toast.success(`Welcome ${user.data.data.name} plz Login`)
 
     } catch (error) {
+        console.log("IN ERROR SECTION")
       toast.error(`Plz Sign In`)
-      navigate('/signin');
+      navigate('/signup');
     }
     
   }
